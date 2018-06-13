@@ -73,7 +73,7 @@ namespace Library_AjaxLab.Controllers
             return Json(list);
         }
 
-        public ActionResult GetBooksByYear(int year)
+        public ActionResult GetBooksByYear(int? year)
         {
             LibraryEntities db = new LibraryEntities();
 
