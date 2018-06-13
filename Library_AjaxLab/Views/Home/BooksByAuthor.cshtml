@@ -4,10 +4,16 @@
 }
 
 <h1>Lookup By Author</h1>
-<input type="text" id="author" class="form-control"
-       oninput="search()" />
+@*<input type="text" id="author" class="form-control"
+       oninput="search()" />*@
 <!-- input type="button" id="search" value="Search by City"
         class="btn btn-default" onclick="search()" /-->
+
+<input id="author" list="bookList" class="form-control" oninput="search()" />
+
+<datalist id="bookList">
+</datalist>
+
 
 <table class="table table-striped" id="authors">
     <!-- this is the inner HTML for #customers -->
@@ -31,6 +37,7 @@
                             + "<th>Title</th>"
                             + "<th>Author</th>"
                             + "<th>Year Published</th></tr>";
+                        var booklist = "";
                         for (var i = 0; i < response.length; i++) {
                             var Book = response[i];
                             var tr = "<tr><td>" + Book.Ranking + "</td>"
@@ -39,9 +46,12 @@
                                 + "<td>" + Book.YearPublished + "</td>"
                                 + "</tr>";
                             tableHTML += tr;
+                            booklist += '<option value="' + Book.Author + '" />';
                         }
                         document.getElementById("authors")
                             .innerHTML = tableHTML;
+                        document.getElementById("bookList")
+                            .innerHTML = booklist;
                     },
                 failure: function (response) {
                     alert("Failure" + response.responseText);
